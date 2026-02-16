@@ -45,7 +45,7 @@ jobs:
         run: pip install bandit
 
       - name: Run Bandit
-        run: bandit -r .
+        run: bandit -r app
 
 
   sca:
