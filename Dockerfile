@@ -1,17 +1,20 @@
 FROM python:3.11-alpine
 
-RUN addgroup --system app && adduser --system --ingroup app app \
-    && apt-get update && apt-get install -y --no-install-recommends ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+# Create user
+RUN addgroup -S app && adduser -S app -G app
+
+# Install required packages (Alpine style)
+RUN apk add --no-cache ca-certificates
 
 WORKDIR /app
 
 COPY requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app ./app
+COPY . .
 
 USER app
 
-EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
