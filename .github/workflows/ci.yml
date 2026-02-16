@@ -2,7 +2,7 @@ name: DevSecOps CI Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ sesi30-devsecops ]
   pull_request:
 
 jobs:
