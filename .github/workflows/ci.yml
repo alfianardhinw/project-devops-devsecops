@@ -50,9 +50,8 @@ jobs:
     needs: sonar
     steps:
       - uses: actions/checkout@v4
-      - name: Install k6
-        run: |
-          sudo apt update
-          sudo apt install -y k6
-      - name: Run Smoke Test
-        run: k6 run loadtest/script.js
+
+      - name: Run k6 Load Test
+        uses: grafana/k6-action@v0.3.0
+        with:
+          filename: loadtest/script.js
